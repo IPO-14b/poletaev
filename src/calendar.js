@@ -1,11 +1,17 @@
 let React = require("react")
 let ReactDOM = require("react-dom")
-let SimpleSelect = require("react-selectize").SimpleSelect
 
+let Select = require("./select.js")
 let Utils = require("./utils.js")
 let Schedule = require("./schedule.js")
 let weekDays = require("./weekdays.js")
 let Popover = require("./popover.js")
+
+let SCHEDULE_TYPES = [
+    {value: 1, label: "Не меняется"},
+    {value: 2, label: "Периодиченость: 2 недели"},
+    {value: 4, label: "Периодиченость: 4 недели"}
+];
 
 class CalendarItemEditor extends React.Component{
     render(){
@@ -15,8 +21,16 @@ class CalendarItemEditor extends React.Component{
             x={(this.props.bbox.left + this.props.bbox.right) / 2} 
             y={(this.props.bbox.top + this.props.bbox.bottom) / 2} 
             rectWidth={this.props.bbox.width} rechHeight={this.props.bbox.hright}>
-            <SimpleSelect options={opts} />
+            
+            <Select values={SCHEDULE_TYPES} value={this.props.lesson.partsCount} 
+                onChange={(value) => {this.props.lesson.setPartsCount(value); this._changed()}} />
+
         </Popover>
+    }
+
+    _changed(){
+        this.props.onChange();
+        this.forceUpdate();
     }
 }
 
@@ -55,7 +69,7 @@ class CalendarItem extends React.Component{
         let domElement = ReactDOM.findDOMNode(this)
         let bbox = domElement.getBoundingClientRect()
 
-        Popover.showPopover(<CalendarItemEditor bbox={bbox} />)
+        Popover.showPopover(<CalendarItemEditor bbox={bbox} lesson={this.props.item} onChange={() => this.forceUpdate()}/>)
     }
 }
 

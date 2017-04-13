@@ -22,6 +22,16 @@ class ScheduleItem{
 		this.partsCount = 1
 		this.parts = Utils.range(0, this.partsCount - 1, 1).map(i => new ItemPart())
 	}
+
+	setPartsCount(partsCount){
+		while (this.parts.length > partsCount){
+			this.parts.pop();
+		}
+		while (this.parts.length < partsCount){
+			this.parts.push(new ItemPart());
+		}
+		this.partsCount = partsCount;
+	}
 }
 
 class Schedule{
