@@ -1,0 +1,56 @@
+@import (reference) "common.less";
+
+input[type=text]{
+    @v-padding: 2px;
+    @h-padding: 10px;
+
+    .bordered_input(){
+        border: 1px solid #f5f5f5;
+        border-bottom-color: #c8c8c8;
+        box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.05);  
+    }
+
+    .focused_input(@color){
+        box-shadow: 0 0 0 2px @color !important;
+        border: 0;
+        padding: @v-padding + 1 @h-padding + 1;
+        
+        &.compact{
+            padding: @v-padding + 1;
+        }
+
+    }
+
+    .bordered_input();
+    border-radius: 5px;
+    padding: @v-padding @h-padding;
+    font-family: "Roboto";
+    font-size: 12px;
+    outline: none;
+
+    &:focus{
+        .focused_input(@focus-color);
+    }
+
+    &.compact{
+        padding: @v-padding;
+    }
+
+    &.seamless{
+        border: 1px solid transparent;
+        box-shadow: none;
+        
+        &:hover, 
+        &:focus{
+            .bordered_input();
+        }
+
+        &:focus{
+            .focused_input(@focus-color);
+        }
+    }
+
+    &.incorrect:focus{
+        .focused_input(@incorrect-focus-color);
+    }
+}

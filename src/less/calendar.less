@@ -1,0 +1,105 @@
+.calendar{
+	@header-size: 30px;
+	@item-height: 70px;
+	
+	@side-margin: 20px; 
+	@indexes-width: 70px;
+
+	position: absolute;
+	left: @side-margin + @indexes-width;
+	top: @side-margin;
+	right: @side-margin;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	align-items: flex-start;
+
+	.day-column{
+		@separator-color: #CBCDD0;
+
+		flex-grow: 1;
+		width: 100% / 7;
+	
+		.day-header{
+			@v-padding: 7px;
+			@border-height: 3px;
+			font-weight: 500;
+			border-bottom: @border-height solid @separator-color;
+			padding: @v-padding 5px;
+			height: @header-size - 2 * @v-padding - @border-height;
+		}
+		
+		.day-item{
+			height: @item-height - 1px;
+			margin: 0 5px;
+			border-bottom: 1px solid @separator-color;
+			position: relative;
+
+			.plus-sign{
+				position: absolute;
+				margin: -10px;
+				left: 50%;
+				top: 50%;
+				transition: opacity 0.2s;
+				opacity: 0;
+
+				& path{
+					fill: rgba(0, 0, 0, 0.05);
+				}
+			}
+
+			&:hover .plus-sign{
+				opacity: 1;
+			}
+		}
+
+		&.holiday{
+			.day-header{
+				color: #737373;
+			}
+
+			.day-item{
+				background-color: #F6F6F6;
+			}
+		}
+	}
+
+
+	.calendar-indexes{
+		position: absolute;
+		left: -@indexes-width;
+		top: @header-size;
+		width: @indexes-width;
+		
+		.calendar-index{
+			position: relative;
+			height: @item-height;
+			width: 100%;
+
+			.index-number{
+				line-height: @item-height;
+				font-size: 18px;
+				position: absolute;
+				right: 10px;
+			}
+			
+			.time-start, 
+			.time-end{
+				position: absolute;
+				width: @indexes-width - 35px;
+				font-size: 11px;
+				text-align: center;
+			}
+
+			@input-offset: 12px;
+
+			.time-start{
+				top: @input-offset;
+			}
+
+			.time-end{
+				bottom: @input-offset;
+			}
+		}
+	}
+}
