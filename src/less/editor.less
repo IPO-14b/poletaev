@@ -1,6 +1,30 @@
 .popover-container .part{
 	.general{
 		display: flex;
+		align-items: center;
+
+		&>*{
+			margin-left: 5px;
+
+			&:first-child{
+				margin-left: 0;
+			}
+		}
+
+		span{
+			margin-left: 1px;
+			margin-right: -4px;
+			color: #AFAFAF;
+		}
+
+		input[type="text"]{
+			flex-grow: 1;
+			width: 1px;
+		}
+
+		.auto-size{
+			flex-grow: 0 !important;
+		}
 	}
 	
 	margin: 0 5px;

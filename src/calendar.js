@@ -6,6 +6,8 @@ let Utils = require("./utils.js")
 let Schedule = require("./schedule.js")
 let weekDays = require("./weekdays.js")
 let Popover = require("./popover.js")
+let Checkbox = require("./checkbox.js");
+let AutoSizeInput = require("./auto-size-input.js");
 
 let SCHEDULE_TYPES = [
     {value: 1, label: "Не меняется"},
@@ -15,8 +17,7 @@ let SCHEDULE_TYPES = [
 
 class CalendarItemEditor extends React.Component{
     render(){
-        var options = ["1", "2", "3"]
-        var opts = options.map((e) => {return {label:e, value:e}})
+        let i = 0;
         return <Popover width="200" height="400" trianglePosition="horizontal"
             x={(this.props.bbox.left + this.props.bbox.right) / 2} 
             y={(this.props.bbox.top + this.props.bbox.bottom) / 2} 
@@ -24,6 +25,17 @@ class CalendarItemEditor extends React.Component{
             
             <Select values={SCHEDULE_TYPES} value={this.props.lesson.partsCount} 
                 onChange={(value) => {this.props.lesson.setPartsCount(value); this._changed()}} />
+
+            {this.props.lesson.parts.map((part) => 
+                <div key={i++} className="part">
+                    <div className="general">
+                        <Checkbox checked={part.active} onChange={(e)=>{part.active = e.target.checked; this._changed();}} />
+                        <input type="text" value={part.name} onChange={(e)=>{part.name = e.target.value; this._changed();}} />
+                        <span>@</span>
+                        <AutoSizeInput value={part.location} onChange={(e)=>{part.location = e.target.value; this._changed();}}/>
+                    </div>
+                </div>
+            )}
 
         </Popover>
     }
