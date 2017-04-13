@@ -51,6 +51,10 @@ class Schedule{
 		return item
 	}
 
+	remove(day, lesson){
+		this.items = this.items.filter(item => item.day != day || item.lesson != lesson);
+	}
+
 }
 
 module.exports = Schedule

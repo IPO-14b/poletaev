@@ -15,7 +15,7 @@ class AutoSizeInput extends React.PureComponent{
 		return <input type="text" className="auto-size" value={this.props.value} onChange={(e) => {
 			this.props.onChange(e); 
 			this.setState({width: this._getWidth(e.target.value)})
-		}} style={{width: this.state.width + "px"}} />
+		}} style={{width: this.state.width + "px"}} disabled={this.props.disabled}/>
 	}
 
 	_getWidth(text){
