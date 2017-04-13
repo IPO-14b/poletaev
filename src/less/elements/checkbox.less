@@ -1,0 +1,28 @@
+.checkbox{
+	width: 12px;
+	height: 12px;
+	display: inline-block;
+	position: relative;
+
+	.full-size(){
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 12px;
+		height: 12px;
+	}
+
+	input{
+		.full-size();
+		margin: 0;
+		z-index: 2;
+		opacity: 0;
+	}
+
+	.graphics	{
+		.full-size();
+		background-color: #3D94F1;
+		border-radius: 2px;
+	}
+
+}
