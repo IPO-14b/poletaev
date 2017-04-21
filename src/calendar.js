@@ -195,8 +195,8 @@ class CalendarLessonTime extends React.Component{
 
     componentDidMount(){
         this.setState({
-                    startTime: this._formatTime(this.props.lesson.startTime),
-                    endTime: this._formatTime(this.props.lesson.endTime)
+                    startTime: this.props.lesson.startTimeDefined ? this._formatTime(this.props.lesson.startTime) : "--:--",
+                    endTime: this.props.lesson.endTimeDefined ? this._formatTime(this.props.lesson.endTime) : "--:--"
                 });
     }
 
@@ -205,12 +205,12 @@ class CalendarLessonTime extends React.Component{
             <div className="index-number">{this.props.lesson.number}</div>
             <input type="text" 
                 className={this._getInputClassName("compact seamless time-start", this.state.startTimeCorrect)} 
-                value={this.state.startTime} onChange={this._handleStartTimeChange}
-                onBlur={this._handleStartTimeBlur} />
+                value={this.state.startTime} onChange={this._handleStartTimeChange} onBlur={this._handleStartTimeBlur} 
+                {... this.props.lesson.startTimeDefined ? {} : {onFocus: (e) => this.setState({startTime: ""})}}/>
             <input type="text" 
                 className={this._getInputClassName("compact seamless time-end", this.state.endTimeCorrect)} 
-                value={this.state.endTime} onChange={this._handleEndTimeChange}
-                onBlur={this._handleEndTimeBlur} />
+                value={this.state.endTime} onChange={this._handleEndTimeChange} onBlur={this._handleEndTimeBlur} 
+                {... this.props.lesson.endTimeDefined ? {} : {onFocus: (e) => this.setState({endTime: ""})}}/>
         </div>
     }
 
@@ -247,9 +247,9 @@ class CalendarLessonTime extends React.Component{
         let newTime = this._parseTime(time)
         let timeCorrect = newTime !== false;
         if (timeCorrect != this.state[correctPropertyName]){
-            let stateObject = {}
-            stateObject[correctPropertyName] = timeCorrect
-            this.setState(stateObject)
+            let stateObject = {};
+            stateObject[correctPropertyName] = timeCorrect;
+            this.setState(stateObject);
         }
     }
 
@@ -266,17 +266,19 @@ class CalendarLessonTime extends React.Component{
     _startTimeBlur(event){
         let time = this._parseTime(event.target.value)
         if (time !== false){
-            this.props.lesson.startTime = time
+            this.props.lesson.startTime = time;
+            this.props.lesson.startTimeDefined = true;
         }
-        this.setState({startTime: this._formatTime(this.props.lesson.startTime), startTimeCorrect: true})
+        this.setState({startTime: this.props.lesson.startTimeDefined ? this._formatTime(this.props.lesson.startTime) : "--:--", startTimeCorrect: true})
     }
 
     _endTimeBlur(event){
         let time = this._parseTime(event.target.value)
         if (time !== false){
-            this.props.lesson.endTime = time
+            this.props.lesson.endTime = time;
+            this.props.lesson.endTimeDefined = true;
         }
-        this.setState({endTime: this._formatTime(this.props.lesson.endTime), endTimeCorrect: true})
+        this.setState({endTime: this.props.lesson.endTimeDefined ? this._formatTime(this.props.lesson.endTime) : "--:--", endTimeCorrect: true})
     }
 }
 

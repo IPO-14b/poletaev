@@ -3,8 +3,10 @@ let Utils = require("./utils.js")
 class Lesson{
     constructor(lessonNumber){
         this.number = lessonNumber
-        this.startTime = 8 * 60
-        this.endTime = 9 * 60 + 35
+        this.startTimeDefined = false;
+        this.endTimeDefined = false;
+        this.startTime = 0;
+        this.endTime = 0;
     }
 }
 
