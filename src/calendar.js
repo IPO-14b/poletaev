@@ -64,7 +64,10 @@ class CalendarItem extends React.Component{
                 {this.props.item.parts.map((part, i) =>
                     <div key={i} className={this._getPartClassName()}>
                         { part.active ? 
-                            <div className="name">{part.name}</div> :
+                            <div>
+                                <div className="name">{part.name}</div>
+                                <div className="location">{part.location}</div>
+                            </div> :
                             <div className="none"></div>
                         }
                     </div>
