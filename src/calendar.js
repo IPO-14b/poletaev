@@ -8,6 +8,7 @@ let weekDays = require("./weekdays.js")
 let Popover = require("./popover.js")
 let Checkbox = require("./checkbox.js");
 let AutoSizeInput = require("./auto-size-input.js");
+let CalendarIndexes = require("./timetable.js").CalendarIndexes;
 
 let SCHEDULE_TYPES = [
     {value: 1, label: "Не меняется"},
@@ -177,117 +178,6 @@ class Calendar extends React.Component{
     }
 }
 
-
-class CalendarLessonTime extends React.Component{
-    constructor(){
-        super()
-        this.state = {
-            startTime: "",
-            endTime: "",
-            startTimeCorrect: true,
-            endTimeCorrect: true
-        }
-        this._handleStartTimeChange = this._startTimeChanged.bind(this)
-        this._handleEndTimeChange = this._endTimeChanged.bind(this)
-        this._handleStartTimeBlur = this._startTimeBlur.bind(this)
-        this._handleEndTimeBlur = this._endTimeBlur.bind(this)
-    }
-
-    componentDidMount(){
-        this.setState({
-                    startTime: this._formatTime(this.props.lesson.startTime),
-                    endTime: this._formatTime(this.props.lesson.endTime)
-                });
-    }
-
-    render(){
-        return <div className="calendar-index">
-            <div className="index-number">{this.props.lesson.number}</div>
-            <input type="text" 
-                className={this._getInputClassName("compact seamless time-start", this.state.startTimeCorrect)} 
-                value={this.state.startTime} onChange={this._handleStartTimeChange}
-                onBlur={this._handleStartTimeBlur} />
-            <input type="text" 
-                className={this._getInputClassName("compact seamless time-end", this.state.endTimeCorrect)} 
-                value={this.state.endTime} onChange={this._handleEndTimeChange}
-                onBlur={this._handleEndTimeBlur} />
-        </div>
-    }
-
-    _parseTime(time){
-        let regexpr = /^(\d+):?(\d*)$/
-        let matches = time.match(regexpr)
-        if (matches == null){
-            return false
-        }
-        let hours = parseInt(matches[1])
-        let minutes = matches[2] == "" ? 0 : parseInt(matches[2])
-        if (hours > 23 || minutes > 59){
-            return false
-        }
-        return hours * 60 + minutes
-    }
-
-    _getInputClassName(classNames, isCorrect){
-        if (!isCorrect){
-            classNames = classNames + " incorrect";
-        }
-        return classNames
-    }
-
-    _formatTime(time){
-        var minutes = (time % 60).toString()
-        if (minutes.length == 1){
-            minutes = "0" + minutes
-        }
-        return (time / 60 | 0) + ":" + minutes
-    }
-
-    _timeChanged(time, correctPropertyName){
-        let newTime = this._parseTime(time)
-        let timeCorrect = newTime !== false;
-        if (timeCorrect != this.state[correctPropertyName]){
-            let stateObject = {}
-            stateObject[correctPropertyName] = timeCorrect
-            this.setState(stateObject)
-        }
-    }
-
-    _startTimeChanged(event){
-        this.setState({startTime: event.target.value})
-        this._timeChanged(event.target.value, "startTimeCorrect")
-    }
-
-    _endTimeChanged(event){
-        this.setState({endTime: event.target.value})
-        this._timeChanged(event.target.value, "endTimeCorrect")
-    }
-
-    _startTimeBlur(event){
-        let time = this._parseTime(event.target.value)
-        if (time !== false){
-            this.props.lesson.startTime = time
-        }
-        this.setState({startTime: this._formatTime(this.props.lesson.startTime), startTimeCorrect: true})
-    }
-
-    _endTimeBlur(event){
-        let time = this._parseTime(event.target.value)
-        if (time !== false){
-            this.props.lesson.endTime = time
-        }
-        this.setState({endTime: this._formatTime(this.props.lesson.endTime), endTimeCorrect: true})
-    }
-}
-
-
-class CalendarIndexes extends React.Component{
-    render(){
-        return <div className="calendar-indexes">
-            {Utils.range(1, 7, 1).map(i => <CalendarLessonTime key={i} lesson={this.props.schedule.lessons[i]} />)}
-        </div>
-   }
-}
 
 
 module.exports = {
