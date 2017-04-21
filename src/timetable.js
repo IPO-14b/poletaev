@@ -80,15 +80,13 @@ class CalendarLessonTime extends React.Component{
         let defined, correctValue;
         if (event.target.dataset["valueproperty"] == "startTime"){
             if (time !== false){
-                this.props.lesson.startTime = time;
-                this.props.lesson.startTimeDefined = true;
+                this.props.lesson.setStartTime(time);
             }
             defined = this.props.lesson.startTimeDefined;
             correctValue = this.props.lesson.startTime;
         }else{
             if (time !== false){
-                this.props.lesson.endTime = time;
-                this.props.lesson.endTimeDefined = true;
+                this.props.lesson.setEndTime(time);
             }
             defined = this.props.lesson.endTimeDefined;
             correctValue = this.props.lesson.endTime;

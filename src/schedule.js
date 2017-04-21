@@ -1,21 +1,45 @@
 let Utils = require("./utils.js")
 
 class Lesson{
-    constructor(lessonNumber){
+    constructor(lessonNumber, schedule){
         this.number = lessonNumber
         this.startTimeDefined = false;
         this.endTimeDefined = false;
         this.startTime = 0;
         this.endTime = 0;
+
+        this._schedule = schedule;
+    }
+
+    setStartTime(time){
+        if (this.endTimeDefined && this.endTime <= time){
+            alert("Начало занятия не может быть позже его конца.");
+        }else if (time < this._schedule.getEarlistTimeForLesson(this.number)){
+            alert("Занятие не может начаться раньше чем закончилось предыдущее");
+        }else{
+            this.startTime = time;
+            this.startTimeDefined = true;
+        }
+    }
+
+    setEndTime(time){
+        if (this.startTimeDefined && this.startTime >= time){
+            alert("Конец занятия должен быть позже его начала.");
+        }else if (time > this._schedule.getLatestTimeForLesson(this.number)){
+            alert("Зянятие не может закончиться позже чем начнется следующее");
+        }else{
+            this.endTime = time;
+            this.endTimeDefined = true;
+        }
     }
 }
 
 class ItemPart{
     constructor(){
-        this.active = true
-        this.name = "<без названия>"
-        this.location = ""
-        this.teachers = []
+        this.active = true;
+        this.name = "<без названия>";
+        this.location = "";
+        this.teachers = [];
     }
 }
 
@@ -39,7 +63,7 @@ class ScheduleItem{
 class Schedule{
     constructor(){
         this.lessonsCount = 6
-        this.lessons = Utils.range(0, this.lessonsCount + 1, 1).map((i) => new Lesson(i))
+        this.lessons = Utils.range(0, this.lessonsCount + 1, 1).map((i) => new Lesson(i, this))
         this.items = []
     }
 
@@ -55,6 +79,34 @@ class Schedule{
 
     remove(day, lesson){
         this.items = this.items.filter(item => item.day != day || item.lesson != lesson);
+    }
+
+    getEarlistTimeForLesson(lessonNumber){
+        let earliest = 0;
+        for(let i = lessonNumber - 1; i >= 0; i--){
+            if (this.lessons[i].endTimeDefined){
+                earliest = this.lessons[i].endTime;
+                break;
+            }else if (this.lessons[i].startTimeDefined){
+                earliest = this.lessons[i].startTime;
+                break;
+            }
+        }
+        return earliest;
+    }
+
+    getLatestTimeForLesson(lessonNumber){
+        let latest = 23 * 60 + 59;
+        for (let i = lessonNumber + 1; i < this.lessons.length; i++){
+            if (this.lessons[i].startTimeDefined){
+                latest = this.lessons[i].startTime;
+                break;
+            }else if (this.lessons[i].endTimeDefined){
+                latest = this.lessons[i].endTime;
+                break;
+            }
+        }
+        return latest;
     }
 
 }
