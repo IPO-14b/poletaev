@@ -119,7 +119,7 @@ class Popover extends React.Component{
 
     _onClickedOutside(e){
         if(e.target == this.svgElement){
-            ReactDOM.unmountComponentAtNode(document.getElementById("popover-root"))
+            Popover.hidePopover();
         }
     }
 }
@@ -130,6 +130,10 @@ Popover.showPopover = (element) => {
         element,
         document.getElementById("popover-root")
     )
+}
+
+Popover.hidePopover = () => {
+    setTimeout(() => ReactDOM.unmountComponentAtNode(document.getElementById("popover-root")));
 }
 
 module.exports = Popover

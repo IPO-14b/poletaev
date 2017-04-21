@@ -1,25 +1,9 @@
 @import (reference) "common.less";
 
+.text-input,
 input[type=text]{
     @v-padding: 2px;
     @h-padding: 10px;
-
-    .bordered_input(){
-        border: 1px solid #f5f5f5;
-        border-bottom-color: #c8c8c8;
-        box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.05);  
-    }
-
-    .focused_input(@color){
-        box-shadow: 0 0 0 2px @color !important;
-        border: 0;
-        padding: @v-padding + 1 @h-padding + 1;
-        
-        &.compact{
-            padding: @v-padding + 1;
-        }
-
-    }
 
     .bordered_input();
     border-radius: 5px;
@@ -28,8 +12,17 @@ input[type=text]{
     font-size: 12px;
     outline: none;
 
+    .focused_text_input(@color){
+        .focused_input(@color);
+        padding: @v-padding + 1 @h-padding + 1;
+
+        &.compact{
+            padding: @v-padding + 1;
+        }
+    }
+
     &:focus{
-        .focused_input(@focus-color);
+        .focused_text_input(@focus-color);
     }
 
     &.compact{
@@ -46,11 +39,11 @@ input[type=text]{
         }
 
         &:focus{
-            .focused_input(@focus-color);
+            .focused_text_input(@focus-color);
         }
     }
 
     &.incorrect:focus{
-        .focused_input(@incorrect-focus-color);
+        .focused_text_input(@incorrect-focus-color);
     }
 }

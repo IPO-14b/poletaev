@@ -1,22 +1,53 @@
 let React = require("react")
 let ReactDOM = require("react-dom")
-let SimpleSelect = require("react-selectize").SimpleSelect
 
+let Select = require("./select.js")
 let Utils = require("./utils.js")
 let Schedule = require("./schedule.js")
 let weekDays = require("./weekdays.js")
 let Popover = require("./popover.js")
+let Checkbox = require("./checkbox.js");
+let AutoSizeInput = require("./auto-size-input.js");
+
+let SCHEDULE_TYPES = [
+    {value: 1, label: "Не меняется"},
+    {value: 2, label: "Периодиченость: 2 недели"},
+    {value: 4, label: "Периодиченость: 4 недели"}
+];
 
 class CalendarItemEditor extends React.Component{
     render(){
-        var options = ["1", "2", "3"]
-        var opts = options.map((e) => {return {label:e, value:e}})
-        return <Popover width="200" height="400" trianglePosition="horizontal"
+        let i = 0;
+        return <Popover width="200" height="300" trianglePosition="horizontal"
             x={(this.props.bbox.left + this.props.bbox.right) / 2} 
             y={(this.props.bbox.top + this.props.bbox.bottom) / 2} 
             rectWidth={this.props.bbox.width} rechHeight={this.props.bbox.hright}>
-            <SimpleSelect options={opts} />
+            
+            <Select values={SCHEDULE_TYPES} value={this.props.lesson.partsCount} 
+                onChange={(value) => {this.props.lesson.setPartsCount(value); this._changed()}} />
+            <div>
+            {this.props.lesson.parts.map((part) => 
+                <div key={i++} className="part">
+                    <div className="general">
+                        <Checkbox checked={part.active} onChange={(e)=>{part.active = e.target.checked; this._changed();}} />
+                        <input type="text" disabled={!part.active} value={part.name} onChange={(e)=>{part.name = e.target.value; this._changed();}} />
+                        <span>@</span>
+                        <AutoSizeInput disabled={!part.active} value={part.location} onChange={(e)=>{part.location = e.target.value; this._changed();}}/>
+                    </div>
+                </div>
+            )}
+            </div>
+
+            <div className="button warning" onClick={() => {
+                this.props.onDelete();
+                Popover.hidePopover();
+            }}>Удалить</div>
         </Popover>
+    }
+
+    _changed(){
+        this.props.onChange();
+        this.forceUpdate();
     }
 }
 
@@ -31,7 +62,10 @@ class CalendarItem extends React.Component{
                 <div className="item">
                 {this.props.item.parts.map((part, i) =>
                     <div key={i} className={this._getPartClassName()}>
-                        <div className="name">{part.name}</div>
+                        { part.active ? 
+                            <div className="name">{part.name}</div> :
+                            <div className="none"></div>
+                        }
                     </div>
                 )}
             </div>
@@ -55,7 +89,8 @@ class CalendarItem extends React.Component{
         let domElement = ReactDOM.findDOMNode(this)
         let bbox = domElement.getBoundingClientRect()
 
-        Popover.showPopover(<CalendarItemEditor bbox={bbox} />)
+        Popover.showPopover(<CalendarItemEditor bbox={bbox} lesson={this.props.item} onChange={() => this.forceUpdate()}
+            onDelete={() => this.props.onDelete(this.props.item)}/>)
     }
 }
 
@@ -64,20 +99,21 @@ class CalendarSlot extends React.Component{
     constructor(){
         super()
         this.state = {
-            item: undefined
+            item: null
         }
 
         this._handleAddItem = this._addItem.bind(this)
     }
 
     componentDidMount(){
+        let item = this.props.schedule.getItem(this.props.day, this.props.lesson);
         this.setState({
-            item: this.props.schedule.getItem(this.props.day, this.props.lesson)
+            item: typeof item != "undefined" ? item : null
         })
     }
 
     render(){
-        if (typeof this.state.item == "undefined"){
+        if (this.state.item == null){
             return <div className="day-item" onClick={this._handleAddItem}>
                 <svg className="plus-sign" width="20" height="20">
                     <path d="M 0 9 V11 H9 V20 H11 V11 H20 V9 H11 V0 H9 V9 Z" />
@@ -85,13 +121,16 @@ class CalendarSlot extends React.Component{
             </div>
         } else {
             return <div className="day-item">
-                <CalendarItem item={this.state.item} />
+                <CalendarItem item={this.state.item} onDelete={() => {
+                    this.setState({item: null});
+                    this.props.schedule.remove(this.props.day, this.props.lesson);
+                }}/>
             </div>
         }
     }
 
     _addItem(){
-        if (typeof this.state.item != "undefined"){
+        if (this.state.item != null){
             return;
         }
         this.setState({

@@ -32,7 +32,8 @@
 		.part{
 			border-bottom: 1px solid @border-color;
 			box-sizing: border-box;
-
+			min-height: 30%;
+	
 			&:last-child{
 				border-bottom-style: none;
 			}
@@ -54,6 +55,13 @@
 			font-weight: bold;
 			padding: 3px;
 			color: fadeout(black, 30%);
+		}
+
+		.none{
+			background: @border-color;
+			height: 1px;
+			width: 50px;
+ 		   margin: 10px auto;
 		}
 	}
 }
