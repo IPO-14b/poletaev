@@ -8,6 +8,7 @@ let weekDays = require("./weekdays.js")
 let Popover = require("./popover.js")
 let Checkbox = require("./checkbox.js");
 let AutoSizeInput = require("./auto-size-input.js");
+let ToolBar = require("./toolbar.js")
 
 let SCHEDULE_TYPES = [
     {value: 1, label: "Не меняется"},
@@ -170,9 +171,12 @@ class Calendar extends React.Component{
     }
 
     render(){
-        return <div className="calendar">
-            <CalendarIndexes schedule={this.state.schedule}/>
-            {weekDays.map((day) => <CalendarDay schedule={this.state.schedule} key={day.number} day={day} />)}
+        return <div>
+            <ToolBar />
+            <div className="calendar">
+                <CalendarIndexes schedule={this.state.schedule}/>
+                {weekDays.map((day) => <CalendarDay schedule={this.state.schedule} key={day.number} day={day} />)}
+            </div>
         </div>
     }
 }
