@@ -1,0 +1,22 @@
+@toolbar-height: 40px;
+
+.toolbar{
+	position: fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	height: @toolbar-height;
+	background-color: rgba(240, 240, 240, 0.95);
+	z-index: 5;
+	border-bottom: 1px solid #e1e1e1;
+	box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.03);
+
+	.logo{
+		width: 105px;
+		height: 17px;
+		position: absolute;
+		left: 50px;
+		top: (@toolbar-height - 17px) / 2;
+		background-image: data-uri('image/svg+xml;charset=UTF-8', 'logo.svg');
+	}
+}

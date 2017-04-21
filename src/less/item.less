@@ -1,5 +1,5 @@
-@bg-color: #BFFFBF;
-@border-color: #B3D7B3;
+@bg-color: #c8e2b5;
+@border-color: #b5cea3;
 
 .item-container{
 	@padding: 3px;
@@ -10,24 +10,23 @@
 	bottom: @padding;
 	overflow: hidden;
 	border-radius: 2px;
-	border-bottom: 1px solid @border-color;
+	
 	
 	&:hover{
 		overflow: visible;
 		border-bottom: none;
 		.item{
-			border-bottom: 1px solid @border-color;
+			
 		}
 	}
 
 	.item{
 		background-color: @bg-color;
-		border: 1px solid @border-color;
-		border-bottom-style: none;
 		min-height: 100%;	
 		font-size: 10px;
-		border-radius: 2px;
+		border-radius: 3px;
 		box-sizing: border-box;
+		padding: 3px;
 
 		.part{
 			border-bottom: 1px solid @border-color;
@@ -54,14 +53,23 @@
 		.name{
 			font-weight: bold;
 			padding: 3px;
-			color: fadeout(black, 30%);
+			padding-bottom: 0;
+			color: #3e7d42;
+		}
+
+		.location{
+			text-align: right;
+			font-size: 9px;
+			color: #3e7d42;
+			margin-right: 4px;
+			padding-bottom: 3px;
 		}
 
 		.none{
 			background: @border-color;
 			height: 1px;
 			width: 50px;
- 		   margin: 10px auto;
+ 		  margin: 10px auto;
 		}
 	}
 }

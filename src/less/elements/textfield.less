@@ -3,7 +3,7 @@
 .text-input,
 input[type=text]{
     @v-padding: 2px;
-    @h-padding: 10px;
+    @h-padding: 3px;
 
     .bordered_input();
     border-radius: 5px;
@@ -14,7 +14,7 @@ input[type=text]{
 
     .focused_text_input(@color){
         .focused_input(@color);
-        padding: @v-padding + 1 @h-padding + 1;
+        // padding: @v-padding + 1 @h-padding + 1;
 
         &.compact{
             padding: @v-padding + 1;

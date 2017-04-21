@@ -9,6 +9,7 @@ let Popover = require("./popover.js")
 let Checkbox = require("./checkbox.js");
 let AutoSizeInput = require("./auto-size-input.js");
 let CalendarIndexes = require("./timetable.js").CalendarIndexes;
+let ToolBar = require("./toolbar.js")
 
 let SCHEDULE_TYPES = [
     {value: 1, label: "Не меняется"},
@@ -64,7 +65,10 @@ class CalendarItem extends React.Component{
                 {this.props.item.parts.map((part, i) =>
                     <div key={i} className={this._getPartClassName()}>
                         { part.active ? 
-                            <div className="name">{part.name}</div> :
+                            <div>
+                                <div className="name">{part.name}</div>
+                                <div className="location">{part.location}</div>
+                            </div> :
                             <div className="none"></div>
                         }
                     </div>
@@ -171,9 +175,12 @@ class Calendar extends React.Component{
     }
 
     render(){
-        return <div className="calendar">
-            <CalendarIndexes schedule={this.state.schedule}/>
-            {weekDays.map((day) => <CalendarDay schedule={this.state.schedule} key={day.number} day={day} />)}
+        return <div>
+            <ToolBar />
+            <div className="calendar">
+                <CalendarIndexes schedule={this.state.schedule}/>
+                {weekDays.map((day) => <CalendarDay schedule={this.state.schedule} key={day.number} day={day} />)}
+            </div>
         </div>
     }
 }
