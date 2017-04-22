@@ -1,5 +1,6 @@
 let React = require("react");
-let generate = require("./generator.js")
+let generate = require("./generator.js").generate;
+let canGenerate = require("./generator.js").canGenerate;
 
 class ToolBar extends React.Component{
 	constructor(props){
@@ -8,6 +9,8 @@ class ToolBar extends React.Component{
             startDate: "2017-03-12",
             endDate: "2017-05-16"
         };
+
+        this._handleGenerateButtonPress = this._onGenerateButtonPressed.bind(this);
 	}
 
     render(){
@@ -27,9 +30,19 @@ class ToolBar extends React.Component{
                 </label>
 
                 <input type="button" className="button" value="Сгенерировать ical" 
-                    onClick={e => generate(this.props.schedule, this.state.startDate, this.state.endState)} />
+                    onClick={this._handleGenerateButtonPress} />
             </div>
         </div>
+    }
+
+    _onGenerateButtonPressed(){
+        if (!canGenerate(this.props.schedule)){
+            alert("Необходимо ввести даты конца и начала занятий для всех событий");
+        }else if (this.props.schedule.items.length == 0){
+            alert("Необходимо добавить хотя бы одно событие");
+        }else{
+            generate(this.props.schedule, this.state.startDate, this.state.endState);
+        }
     }
 }
 

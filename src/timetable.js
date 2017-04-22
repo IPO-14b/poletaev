@@ -1,7 +1,6 @@
 let React = require("react");
 let Utils = require("./utils.js");
 
-
 class CalendarLessonTime extends React.Component{
     constructor(props){
         super()

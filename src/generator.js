@@ -1,6 +1,15 @@
 let ical = require("ical-generator");
 let moment = require("moment");
 
+function canGenerate(schedule){
+    for (let i = 0; i < schedule.items.length; i++){
+        if (!schedule.items[i].lesson.startTimeDefined || !schedule.items[i].lesson.endTimeDefined){
+            return false;
+        }
+    }
+    return true;
+}
+
 function generate(schedule, startDate, endDate){
     // TODO: Change domain
 	let calendar = ical({domain: "localhost", name: "Schedule"});
@@ -38,7 +47,6 @@ function generate(schedule, startDate, endDate){
     }
 
     let string = calendar.toString();
-    console.log(string);
     let element = document.createElement("a");
     element.setAttribute("download", "schedule.ics")
     element.setAttribute("href", "data:text/calendar;charset=utf-8," + encodeURIComponent(string));
@@ -49,4 +57,7 @@ function generate(schedule, startDate, endDate){
     document.body.removeChild(element);
 }
 
-module.exports = generate;
+module.exports = {
+    generate: generate,
+    canGenerate: canGenerate
+}
