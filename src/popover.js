@@ -1,9 +1,44 @@
+/** @module popover */
+
 let React = require("react")
 let ReactDOM = require("react-dom")
 
 const VERTICLE_PADDING = 20
 
+
+/**
+ * React-компонент используеющийся для создания закрепленного всплывающего окна.
+ * 
+ * Компонент отображается на экране польвателя поверх всех остальных элементов 
+ * интерфейса и в один момент времени может быть показан только один экземпляр.
+ *
+ * @property {number} state.leftOffset - Смещение компонента относительно 
+ *     левого края окна браузера
+ * @property {number} state.topOffset - Смещение компонена относительно 
+ *     верхнего края окна браузера
+ * @property {number} state.triangleOffset - Смещение треугольника относительно 
+ *     левого верхнего угла компонента
+ * @property {string} props.trianglePosition - Положение треугольника. Может 
+ *     принимать одно из следующих значений: undefined, left, right, top, 
+ *     bottom, horizontal, vertical. В случае использования значения 
+ *     horizontal или vertical положение будет определено автоматически
+ * @property {number} props.x - Абсцисса центра прямоугольника, на который 
+ *     будет направлен триугольник, заданная в системе координат страницы
+ * @property {number} props.y - Одрината центра прямоугольника, на который 
+ *     будет направлен триугольник, заданная в системе координат страницы
+ * @property {number} props.width - Ширина, занимаемая компонентом, выраженная
+ *     в пикселях
+ * @property {number} rectWidth - Ширина прямоугольника с центрам в точке 
+ *     (x, y), на который будет направлен триугольник
+ * @property {number} rectHeight - Высота прямоугольника с центрам в точке 
+ *     (x, y), на который будет направлен триугольник
+ */
 class Popover extends React.Component{
+
+    /**
+     * Конструктор компонента. Устанавливает начальное состояние
+     * @constructor
+     */
     constructor(){
         super()
         this.state = {
@@ -15,6 +50,10 @@ class Popover extends React.Component{
         this._handleClickOutside = this._onClickedOutside.bind(this)
     }
 
+    /**
+     * Событие жизненного цикла React-компонента. Вызывается после первого 
+     * добавления компонента в DOM-дерево страницы.
+     */
     componentDidMount(){
         let position = typeof this.props.trianglePosition != "undefined" ? this.props.trianglePosition : "left"
         if (position == "horizontal"){
@@ -61,6 +100,9 @@ class Popover extends React.Component{
         })
     }
 
+    /**
+     * Событие жизненного цикла React-компонента. Вызывается после каждого обновления.
+     */
     componentDidUpdate(){
         let height = this.refs.container.getBoundingClientRect().height;
         if (height != this.state.height){
@@ -68,6 +110,15 @@ class Popover extends React.Component{
         }
     }
 
+    /**
+     * Используется для определения внешнего вида компонента.
+     * 
+     * На заднем фоне - прямоугольник с закругленными углами и стрелкой c одной
+     * стороны. На переднем - тег <code>div</code>, содержащий вложенные в компонент
+     * компоненты, HTML или SVG-теги.
+     * 
+     * @return {object}
+     */
     render(){ 
         let topOffset = Math.min(window.innerHeight - this.state.height - VERTICLE_PADDING, this.state.topOffset);
         return <div className="popover-container" onClick={this._handleClickOutside}>
@@ -107,6 +158,12 @@ class Popover extends React.Component{
         </div>
     }
 
+    /**
+     * @private
+     * @param  {number} topOffset - Смещение компонента от верхнего края экрана
+     * @return {string} Строка, определяюая форму компонента, спользуемая как 
+     *                  содержимое аттрибута <code>d</code> тега <code>path</code>
+     */
     _generatePath(topOffset){
         let path = "M 0 5 "
 
@@ -136,6 +193,12 @@ class Popover extends React.Component{
         return path
     }
 
+    /**
+     * Событие нажатия на область вне компонента.
+     * 
+     * @private 
+     * @param  {MouseEvent} - Объект события
+     */
     _onClickedOutside(e){
         if(e.target == this.svgElement){
             Popover.hidePopover();
@@ -143,7 +206,12 @@ class Popover extends React.Component{
     }
 }
 
-
+/**
+ * Отображает компонент пользователю.
+ * 
+ * @static
+ * @param  {Popover} element - Компонент, который необходимо показать пользователю
+ */
 Popover.showPopover = (element) => {
     ReactDOM.render(
         element,
@@ -151,6 +219,9 @@ Popover.showPopover = (element) => {
     )
 }
 
+/**
+ * Удаляет текущий отображаемый компонент из DOM-дерева.
+ */
 Popover.hidePopover = () => {
     setTimeout(() => ReactDOM.unmountComponentAtNode(document.getElementById("popover-root")));
 }

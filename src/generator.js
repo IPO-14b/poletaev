@@ -1,6 +1,18 @@
+/**
+ * Модуль содержит функции для генерации файлов .ics
+ * @module generator
+ */
+
 let ical = require("ical-generator");
 let moment = require("moment");
 
+/**
+ * Проверяет, известно ли время начала и конца каждого занятия, для которых
+ * определены события в календаре.
+ *
+ * @param  {Schedule} - Объект расписания
+ * @return {boolean} Возможно ли создание файла
+ */
 function canGenerate(schedule){
     for (let i = 0; i < schedule.items.length; i++){
         if (!schedule.items[i].lesson.startTimeDefined || !schedule.items[i].lesson.endTimeDefined){
@@ -10,6 +22,15 @@ function canGenerate(schedule){
     return true;
 }
 
+
+/**
+ * Генерирует файл .ics по заданному расписанию и предоставляет его на скачивание
+ * пользователю.
+ *
+ * @param  {Schedule} schedule - Объект расписания
+ * @param  {string} startDate - Дата начала семестра в формате <code>ГГГГ-ММ-ДД</code>
+ * @param  {string} endDate - Дата конца семестра в формате <code>ГГГГ-ММ-ДД</code>
+ */
 function generate(schedule, startDate, endDate){
     // TODO: Change domain
 	let calendar = ical({domain: "localhost", name: "Schedule"});

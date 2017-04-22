@@ -1,7 +1,27 @@
+/** @module timetable */
+
 let React = require("react");
 let Utils = require("./utils.js");
 
+/**
+ * Компонент, используемый для отбражения и редактирования времени начала и 
+ * конца занятия.
+ *
+ * @property {string} state.startTime - Значение, отображаемое в поле 
+ *     редактировании времени начала занятия
+ * @property {boolean} state.startTimeCorrect - Определяет корректность 
+ *     введенных данных в поле редактирования даты начала занятия
+ * @property {string} state.endTime - Значение, отображаемое в поле 
+ *     редактировании времени конца занятия
+ * @property {boolean} state.startTimeCorrect - Определяет корректность 
+ *     введенных данных в поле редактирования даты конца занятия
+ * @property {Lesson} props.lesson - Редактируемый временной интервал занятия
+ */
 class CalendarLessonTime extends React.Component{
+    /**
+     * @constructor
+     * @param {object} props - Аттрибуты с которыми компонент был добавлен в DOM-дерево
+     */
     constructor(props){
         super()
         this.state = {
@@ -14,6 +34,9 @@ class CalendarLessonTime extends React.Component{
         this._handleTimeBlur = this._timeBlur.bind(this);
     }
 
+    /**
+     * @return {object} DOM-элементы, определяющие компонент.
+     */
     render(){
         return <div className="calendar-index">
             <div className="index-number">{this.props.lesson.number + 1}</div>
@@ -30,6 +53,16 @@ class CalendarLessonTime extends React.Component{
         </div>
     }
 
+    /**
+     * Распознает дату введенную пользователем и возвращает время, 
+     * преобразованное в количество минут прошедших между полуночью и введенным
+     * пользователем временем
+     *
+     * @private
+     * @param  {string} time - Введенная пользователем строка
+     * @return {number | boolean} Количество минут после полуночи или false, 
+     *     если введенное значение не удовлетворяет шаблону /^(\d+):?(\d*)$/
+     */
     _parseTime(time){
         let regexpr = /^(\d+):?(\d*)$/
         let matches = time.match(regexpr)
@@ -44,6 +77,16 @@ class CalendarLessonTime extends React.Component{
         return hours * 60 + minutes
     }
 
+    /**
+     * Формирует список классов - описание стилей элемента пользовательского 
+     * ввода в зависимости от корректности введенных пользователей данных.
+     * 
+     * @private
+     * @param  {string} classNames - Список классов, использующихся для полей 
+     *     ввода в любом состоянии.
+     * @param  {boolean} isCorrect - Флаг правильности введенных данных
+     * @return {string} Спсиок классов CSS
+     */
     _getInputClassName(classNames, isCorrect){
         if (!isCorrect){
             classNames = classNames + " incorrect";
@@ -51,6 +94,15 @@ class CalendarLessonTime extends React.Component{
         return classNames
     }
 
+    /**
+     * Форматирует время, выраженное в минутах, прошедших после полуночи в 
+     * строку в формате <code>М.СС</code>, которую можно отображать 
+     * пользователю 
+     * 
+     * @private
+     * @param  {number} time - Количество минут, прошедших после полуночи
+     * @return {string} Форматированная дата
+     */
     _formatTime(time){
         var minutes = (time % 60).toString()
         if (minutes.length == 1){
@@ -59,6 +111,14 @@ class CalendarLessonTime extends React.Component{
         return (time / 60 | 0) + ":" + minutes
     }
 
+    /**
+     * Обработчик события изменения времени пользователем. Поля объекта 
+     * состояния, которые необходимо изменить определяютя с помощью аттрибутов
+     * data-valueProperty и data-correctProperty.
+     * 
+     * @private
+     * @param {Event} event Событие React
+     */
     _timeChanged(event){
         let stateDiff = {};
         stateDiff[event.target.dataset["valueproperty"]] = event.target.value;
@@ -74,6 +134,14 @@ class CalendarLessonTime extends React.Component{
         }
     }
 
+    /**
+     * Обработчик события снятия фокуса с элемента ввода. Поля объекта 
+     * состояния, которые необходимо изменить определяютя с помощью аттрибутов
+     * data-valueProperty и data-correctProperty.
+     *
+     * @private
+     * @param {Event} event Событие React
+     */
     _timeBlur(event){
         let time = this._parseTime(event.target.value);
         let defined, correctValue;
@@ -97,8 +165,16 @@ class CalendarLessonTime extends React.Component{
     }
 }
 
-
+/**
+ * Компонент, используемый для оображения списка, содержащего номер временного
+ * интервала, время начала и конца занятия.
+ *
+ * @property {Lesson[]} props.lessons - Список временных интервалов
+ */
 class CalendarIndexes extends React.Component{
+    /**
+     * @return {object} DOM-элементы, определяющие компонент.
+     */
     render(){
         return <div className="calendar-indexes">
             {Utils.range(0, 6, 1).map(i => <CalendarLessonTime key={i} lesson={this.props.schedule.lessons[i]} />)}

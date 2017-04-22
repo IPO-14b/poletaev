@@ -26,7 +26,7 @@
     "matchdep": "^1.0.1"
   },
   "scripts": {
-    "test": ""
+    "docs": "./node_modules/.bin/jsdoc -d docs -t ./node_modules/docdash/ -p src"
   },
   "author": "Vlad Poletaev",
   "license": "MIT",

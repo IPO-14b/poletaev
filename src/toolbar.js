@@ -1,7 +1,18 @@
+/** @module toolbar */
+
 let React = require("react");
 let generate = require("./generator.js").generate;
 let canGenerate = require("./generator.js").canGenerate;
 
+/**
+ * Панель инструментов, содержащая логотип, настройки генерации .ics-файла.
+ *
+ * @property {string} state.startDate - Дата начала семестра в формате 
+ *     <code>ГГГГ-ММ-ДД</code>
+ * @property {string} state.endDate - Дата конца семестра в формате 
+ *     <code>ГГГГ-ММ-ДД</code>
+ * @property {Schedule} props.schedule - Объект расписания
+ */
 class ToolBar extends React.Component{
 	constructor(props){
 		super(props);
@@ -13,6 +24,9 @@ class ToolBar extends React.Component{
         this._handleGenerateButtonPress = this._onGenerateButtonPressed.bind(this);
 	}
 
+    /**
+     * @return {object} DOM-элементы, определяющие компонент.
+     */
     render(){
         return <div className="toolbar">
             <div className="logo"></div>
@@ -35,6 +49,12 @@ class ToolBar extends React.Component{
         </div>
     }
 
+    /**
+     * Обработчик события нажатия на кнопку генерации. Производится проверка
+     * возможности начала генерации и генерируется файл .ics
+     *
+     * @private
+     */
     _onGenerateButtonPressed(){
         if (!canGenerate(this.props.schedule)){
             alert("Необходимо ввести даты конца и начала занятий для всех событий");
