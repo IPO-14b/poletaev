@@ -176,7 +176,7 @@ class Calendar extends React.Component{
 
     render(){
         return <div>
-            <ToolBar />
+            <ToolBar schedule={this.state.schedule}/>
             <div className="calendar">
                 <CalendarIndexes schedule={this.state.schedule}/>
                 {weekDays.map((day) => <CalendarDay schedule={this.state.schedule} key={day.number} day={day} />)}

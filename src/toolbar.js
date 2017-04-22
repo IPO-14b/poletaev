@@ -1,4 +1,5 @@
 let React = require("react");
+let generate = require("./generator.js")
 
 class ToolBar extends React.Component{
 	constructor(props){
@@ -25,7 +26,8 @@ class ToolBar extends React.Component{
                         onChange={e => this.setState({startDate: e.target.value})}/>
                 </label>
 
-                <input type="button" className="button" value="Сгенерировать ical" />
+                <input type="button" className="button" value="Сгенерировать ical" 
+                    onClick={e => generate(this.props.schedule, this.state.startDate, this.state.endState)} />
             </div>
         </div>
     }

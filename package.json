@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "main": "Gruntfile.js",
   "dependencies": {
+    "ical-generator": "^0.2.9",
+    "moment": "^2.18.1",
     "react": "^15.4.2",
     "react-addons-css-transition-group": "^15.4.2",
     "react-addons-shallow-compare": "^15.4.2",

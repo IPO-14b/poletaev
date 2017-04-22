@@ -17,7 +17,7 @@ class CalendarLessonTime extends React.Component{
 
     render(){
         return <div className="calendar-index">
-            <div className="index-number">{this.props.lesson.number}</div>
+            <div className="index-number">{this.props.lesson.number + 1}</div>
             <input type="text" 
                 className={this._getInputClassName("compact seamless time-start", this.state.startTimeCorrect)} 
                 value={this.state.startTime} onChange={this._handleTimeChange} onBlur={this._handleTimeBlur} 
@@ -102,7 +102,7 @@ class CalendarLessonTime extends React.Component{
 class CalendarIndexes extends React.Component{
     render(){
         return <div className="calendar-indexes">
-            {Utils.range(1, 7, 1).map(i => <CalendarLessonTime key={i} lesson={this.props.schedule.lessons[i]} />)}
+            {Utils.range(0, 6, 1).map(i => <CalendarLessonTime key={i} lesson={this.props.schedule.lessons[i]} />)}
         </div>
     }
 }

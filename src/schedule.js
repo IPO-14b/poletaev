@@ -45,8 +45,10 @@ class ItemPart{
 
 class ScheduleItem{
     constructor(day, lesson){
-        this.partsCount = 1
-        this.parts = Utils.range(0, this.partsCount - 1, 1).map(i => new ItemPart())
+        this.partsCount = 1;
+        this.parts = Utils.range(0, this.partsCount - 1, 1).map(i => new ItemPart());
+        this.day = day;
+        this.lesson = lesson;
     }
 
     setPartsCount(partsCount){
@@ -67,8 +69,8 @@ class Schedule{
         this.items = []
     }
 
-    getItem(day, lesson){
-        this.items.find(item => item.day == day && item.lesson == lesson)
+    getItem(dayNo, lessonNo){
+        return this.items.find(item => item.day.number == dayNo && item.lesson.number == lessonNo);
     }
 
     createItem(day, lesson){
