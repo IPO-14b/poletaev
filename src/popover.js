@@ -59,7 +59,8 @@ class Popover extends React.Component{
         })
     }
 
-    render(){
+    render(){ 
+        let topOffset = Math.min(window.innerHeight - this.props.height - VERTICLE_PADDING, this.state.topOffset);
         return <div className="popover-container" onClick={this._handleClickOutside}>
             <svg width="100%" height="100%" ref={svg => this.svgElement = svg}>
                 <defs>
@@ -84,34 +85,44 @@ class Popover extends React.Component{
                     </filter>
                 </defs>
                 <path filter="url(#dropshadow)" className="popover-background" 
-                    transform={`translate(${this.state.leftOffset}, ${this.state.topOffset})`} 
-                    d={this._generatePath()} />
+                    transform={`translate(${this.state.leftOffset}, ${topOffset})`} 
+                    d={this._generatePath(topOffset)} />
             </svg>
             <div className="content" style={{
-                left: this.state.leftOffset + "px", top: this.state.topOffset + "px",
-                width: this.props.width + "px", height: this.props.height + "px"
+                left: this.state.leftOffset + "px", 
+                top: topOffset + "px",
+                width: this.props.width + "px", 
+                height: this.props.height + "px"
             }}>
                 {this.props.children}
             </div>
         </div>
     }
 
-    _generatePath(){
+    _generatePath(topOffset){
         let path = "M 0 5 "
+
+        let triangleOffset;
+        if (this.state.trianglePosition == "left" || this.state.trianglePosition == "right"){
+            triangleOffset = Math.min(this.props.y - topOffset, window.innerHeight - VERTICLE_PADDING - topOffset - 20);
+        }else{
+            triangleOffset = this.state.triangleOffset;
+        }
+
         if (this.state.trianglePosition == "left"){
-            path += `V ${this.state.triangleOffset - 11} q0 2 -2 4 l-7 5 q-2 2 0 4 l7 5 q 2 2 2 4`
+            path += `V ${triangleOffset - 11} q0 2 -2 4 l-7 5 q-2 2 0 4 l7 5 q 2 2 2 4`
         }
         path += `V ${this.props.height - 5} A 5 5 0 0 0 5 ${this.props.height}`
         if (this.state.trianglePosition == "down"){
-            path += `H ${this.state.triangleOffset - 11} q2 0 4 2 l5 7 q2 2 4 0 l5 -7 q2 -2 4 -2`
+            path += `H ${triangleOffset - 11} q2 0 4 2 l5 7 q2 2 4 0 l5 -7 q2 -2 4 -2`
         }
         path += `H ${this.props.width - 5} A 5 5 0 0 0 ${this.props.width} ${this.props.height - 5}`
         if (this.state.trianglePosition == "right"){
-            path += `V ${this.state.triangleOffset + 11} q0 -2 2 -4 l7 -5 q2 -2 0 -4 l-7 -5 q-2 -2 -2 -4`
+            path += `V ${triangleOffset + 11} q0 -2 2 -4 l7 -5 q2 -2 0 -4 l-7 -5 q-2 -2 -2 -4`
         }
         path += `V 5 A 5 5 0 0 0 ${this.props.width - 5} 0`
         if (this.state.trianglePosition == "up"){
-            path += `H ${this.state.triangleOffset + 11} q-2 0 -4 -2 l-5 -7 q-2 -2 -4 0 l-5 7 q-2 2 -4 2`
+            path += `H ${triangleOffset + 11} q-2 0 -4 -2 l-5 -7 q-2 -2 -4 0 l-5 7 q-2 2 -4 2`
         }
         path += "H 5 A 5 5 0 0 0 0 5 Z"
         return path
