@@ -9,7 +9,8 @@ class Popover extends React.Component{
         this.state = {
             leftOffset: 0,
             topOffset: 0,
-            triangleOffset: 0
+            triangleOffset: 0,
+            height: 0
         }
         this._handleClickOutside = this._onClickedOutside.bind(this)
     }
@@ -21,15 +22,16 @@ class Popover extends React.Component{
         }
         let rectWidth = typeof this.props.rectWidth != "undefined" ? this.props.rectWidth : 0
         let rectHeight = typeof this.props.rectHeight != "undefined" ? this.props.rectHeight : 0
+        this.state.height = this.refs.container.getBoundingClientRect().height;
         let x = this.props.x - this.props.width / 2
-        let y = this.props.y - this.props.height / 2
+        let y = this.props.y - this.state.height / 2
         
         let triangleOffset;
         if (position == "left" || position == "right"){
             if (y < VERTICLE_PADDING){
                 y = VERTICLE_PADDING;
-            }else if (y + this.props.height > window.innerHeight - VERTICLE_PADDING){
-                y = window.innerHeight - VERTICLE_PADDING - this.props.height;
+            }else if (y + this.state.height > window.innerHeight - VERTICLE_PADDING){
+                y = window.innerHeight - VERTICLE_PADDING - this.state.height;
             }
             triangleOffset = this.props.y - y
         } else {
@@ -45,10 +47,10 @@ class Popover extends React.Component{
                 break;
 
             case "up":
-                y -= this.props.height / 2 + 12 + rectHeight / 2
+                y -= this.state.height / 2 + 12 + rectHeight / 2
                 break;
             case "bottom":
-                y -= this.props.height / 2 + 12 + rectHeight / 2
+                y -= this.state.height / 2 + 12 + rectHeight / 2
                 break;
         }
         this.setState({
@@ -57,6 +59,13 @@ class Popover extends React.Component{
             triangleOffset: triangleOffset |0,
             trianglePosition: position
         })
+    }
+
+    componentDidUpdate(){
+        let height = this.refs.container.getBoundingClientRect().height;
+        if (height != this.state.height){
+            this.setState({height: height});
+        }
     }
 
     render(){
@@ -87,9 +96,9 @@ class Popover extends React.Component{
                     transform={`translate(${this.state.leftOffset}, ${this.state.topOffset})`} 
                     d={this._generatePath()} />
             </svg>
-            <div className="content" style={{
+            <div className="content" ref="container" style={{
                 left: this.state.leftOffset + "px", top: this.state.topOffset + "px",
-                width: this.props.width + "px", height: this.props.height + "px"
+                width: this.props.width + "px"
             }}>
                 {this.props.children}
             </div>
@@ -101,11 +110,11 @@ class Popover extends React.Component{
         if (this.state.trianglePosition == "left"){
             path += `V ${this.state.triangleOffset - 11} q0 2 -2 4 l-7 5 q-2 2 0 4 l7 5 q 2 2 2 4`
         }
-        path += `V ${this.props.height - 5} A 5 5 0 0 0 5 ${this.props.height}`
+        path += `V ${this.state.height - 5} A 5 5 0 0 0 5 ${this.state.height}`
         if (this.state.trianglePosition == "down"){
             path += `H ${this.state.triangleOffset - 11} q2 0 4 2 l5 7 q2 2 4 0 l5 -7 q2 -2 4 -2`
         }
-        path += `H ${this.props.width - 5} A 5 5 0 0 0 ${this.props.width} ${this.props.height - 5}`
+        path += `H ${this.props.width - 5} A 5 5 0 0 0 ${this.props.width} ${this.state.height - 5}`
         if (this.state.trianglePosition == "right"){
             path += `V ${this.state.triangleOffset + 11} q0 -2 2 -4 l7 -5 q2 -2 0 -4 l-7 -5 q-2 -2 -2 -4`
         }
