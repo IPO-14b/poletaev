@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>CalendarLessonTime - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="module-auto-size-input-AutoSizeInput.html">AutoSizeInput</a><ul class='methods'><li data-type='method'><a href="module-auto-size-input-AutoSizeInput.html#_getWidth">_getWidth</a></li><li data-type='method'><a href="module-auto-size-input-AutoSizeInput.html#render">render</a></li></ul></li><li><a href="module-calendar-Calendar.html">Calendar</a><ul class='methods'><li data-type='method'><a href="module-calendar-Calendar.html#render">render</a></li></ul></li><li><a href="module-calendar-CalendarDay.html">CalendarDay</a><ul class='methods'><li data-type='method'><a href="module-calendar-CalendarDay.html#_makeClassName">_makeClassName</a></li><li data-type='method'><a href="module-calendar-CalendarDay.html#render">render</a></li></ul></li><li><a href="module-calendar-CalendarItem.html">CalendarItem</a><ul class='methods'><li data-type='method'><a href="module-calendar-CalendarItem.html#_getPartClassName">_getPartClassName</a></li><li data-type='method'><a href="module-calendar-CalendarItem.html#_onClick">_onClick</a></li><li data-type='method'><a href="module-calendar-CalendarItem.html#render">render</a></li></ul></li><li><a href="module-calendar-CalendarItemEditor.html">CalendarItemEditor</a><ul class='methods'><li data-type='method'><a href="module-calendar-CalendarItemEditor.html#_changed">_changed</a></li><li data-type='method'><a href="module-calendar-CalendarItemEditor.html#render">render</a></li></ul></li><li><a href="module-calendar-CalendarSlot.html">CalendarSlot</a><ul class='methods'><li data-type='method'><a href="module-calendar-CalendarSlot.html#_addItem">_addItem</a></li><li data-type='method'><a href="module-calendar-CalendarSlot.html#componentDidMount">componentDidMount</a></li><li data-type='method'><a href="module-calendar-CalendarSlot.html#render">render</a></li></ul></li><li><a href="module-checkbox-Checkbox.html">Checkbox</a><ul class='methods'><li data-type='method'><a href="module-checkbox-Checkbox.html#render">render</a></li></ul></li><li><a href="module-popover-Popover.html">Popover</a><ul class='methods'><li data-type='method'><a href="module-popover-Popover.html#.hidePopover">hidePopover</a></li><li data-type='method'><a href="module-popover-Popover.html#.showPopover">showPopover</a></li><li data-type='method'><a href="module-popover-Popover.html#_generatePath">_generatePath</a></li><li data-type='method'><a href="module-popover-Popover.html#_onClickedOutside">_onClickedOutside</a></li><li data-type='method'><a href="module-popover-Popover.html#componentDidMount">componentDidMount</a></li><li data-type='method'><a href="module-popover-Popover.html#componentDidUpdate">componentDidUpdate</a></li><li data-type='method'><a href="module-popover-Popover.html#render">render</a></li></ul></li><li><a href="module-schedule-ItemPart.html">ItemPart</a></li><li><a href="module-schedule-Lesson.html">Lesson</a><ul class='methods'><li data-type='method'><a href="module-schedule-Lesson.html#setEndTime">setEndTime</a></li><li data-type='method'><a href="module-schedule-Lesson.html#setStartTime">setStartTime</a></li></ul></li><li><a href="module-schedule-Schedule.html">Schedule</a><ul class='methods'><li data-type='method'><a href="module-schedule-Schedule.html#createItem">createItem</a></li><li data-type='method'><a href="module-schedule-Schedule.html#getEarlistTimeForLesson">getEarlistTimeForLesson</a></li><li data-type='method'><a href="module-schedule-Schedule.html#getItem">getItem</a></li><li data-type='method'><a href="module-schedule-Schedule.html#getLatestTimeForLesson">getLatestTimeForLesson</a></li><li data-type='method'><a href="module-schedule-Schedule.html#remove">remove</a></li></ul></li><li><a href="module-schedule-ScheduleItem.html">ScheduleItem</a><ul class='methods'><li data-type='method'><a href="module-schedule-ScheduleItem.html#setPartsCount">setPartsCount</a></li></ul></li><li><a href="module-select-Select.html">Select</a><ul class='methods'><li data-type='method'><a href="module-select-Select.html#render">render</a></li></ul></li><li><a href="module-timetable-CalendarIndexes.html">CalendarIndexes</a><ul class='methods'><li data-type='method'><a href="module-timetable-CalendarIndexes.html#render">render</a></li></ul></li><li><a href="module-timetable-CalendarLessonTime.html">CalendarLessonTime</a><ul class='methods'><li data-type='method'><a href="module-timetable-CalendarLessonTime.html#_formatTime">_formatTime</a></li><li data-type='method'><a href="module-timetable-CalendarLessonTime.html#_getInputClassName">_getInputClassName</a></li><li data-type='method'><a href="module-timetable-CalendarLessonTime.html#_parseTime">_parseTime</a></li><li data-type='method'><a href="module-timetable-CalendarLessonTime.html#_timeBlur">_timeBlur</a></li><li data-type='method'><a href="module-timetable-CalendarLessonTime.html#_timeChanged">_timeChanged</a></li><li data-type='method'><a href="module-timetable-CalendarLessonTime.html#render">render</a></li></ul></li><li><a href="module-toolbar-ToolBar.html">ToolBar</a><ul class='methods'><li data-type='method'><a href="module-toolbar-ToolBar.html#_onGenerateButtonPressed">_onGenerateButtonPressed</a></li><li data-type='method'><a href="module-toolbar-ToolBar.html#render">render</a></li></ul></li><li><a href="module-weekdays-WeekDay.html">WeekDay</a></li></ul><h3>Modules</h3><ul><li><a href="module-auto-size-input.html">auto-size-input</a></li><li><a href="module-calendar.html">calendar</a></li><li><a href="module-checkbox.html">checkbox</a></li><li><a href="module-generator.html">generator</a><ul class='methods'><li data-type='method'><a href="module-generator.html#~canGenerate">canGenerate</a></li><li data-type='method'><a href="module-generator.html#~generate">generate</a></li></ul></li><li><a href="module-popover.html">popover</a></li><li><a href="module-schedule.html">schedule</a></li><li><a href="module-select.html">select</a></li><li><a href="module-timetable.html">timetable</a></li><li><a href="module-toolbar.html">toolbar</a></li><li><a href="module-utils.html">utils</a><ul class='methods'><li data-type='method'><a href="module-utils.html#~range">range</a></li></ul></li><li><a href="module-weekdays.html">weekdays</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">CalendarLessonTime</h1>
+    
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>
+            <span class="ancestors"><a href="module-timetable.html">timetable</a>~</span>
+        
+        CalendarLessonTime
+        </h2>
+        
+            <div class="class-description">Компонент, используемый для отбражения и редактирования времени начала и 
+конца занятия.</div>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+    <h2>Constructor</h2>
+    
+
+    <h4 class="name" id="CalendarLessonTime"><span class="type-signature"></span>new CalendarLessonTime<span class="signature">(props)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="timetable.js.html">timetable.js</a>, <a href="timetable.js.html#line20">line 20</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>state.startTime</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Значение, отображаемое в поле 
+    редактировании времени начала занятия</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>state.startTimeCorrect</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Определяет корректность 
+    введенных данных в поле редактирования даты начала занятия</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>state.endTime</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Значение, отображаемое в поле 
+    редактировании времени конца занятия</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>state.startTimeCorrect</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Определяет корректность 
+    введенных данных в поле редактирования даты конца занятия</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>props.lesson</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Lesson</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Редактируемый временной интервал занятия</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>props</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Аттрибуты с которыми компонент был добавлен в DOM-дерево</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="_formatTime"><span class="type-signature">(private) </span>_formatTime<span class="signature">(time)</span><span class="type-signature"> &rarr; {string}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="timetable.js.html">timetable.js</a>, <a href="timetable.js.html#line106">line 106</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    Форматирует время, выраженное в минутах, прошедших после полуночи в 
+строку в формате <code>М.СС</code>, которую можно отображать 
+пользователю
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>time</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Количество минут, прошедших после полуночи</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Форматированная дата
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="_getInputClassName"><span class="type-signature">(private) </span>_getInputClassName<span class="signature">(classNames, isCorrect)</span><span class="type-signature"> &rarr; {string}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="timetable.js.html">timetable.js</a>, <a href="timetable.js.html#line90">line 90</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    Формирует список классов - описание стилей элемента пользовательского 
+ввода в зависимости от корректности введенных пользователей данных.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>classNames</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Список классов, использующихся для полей 
+    ввода в любом состоянии.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>isCorrect</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Флаг правильности введенных данных</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Спсиок классов CSS
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="_parseTime"><span class="type-signature">(private) </span>_parseTime<span class="signature">(time)</span><span class="type-signature"> &rarr; {number|boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="timetable.js.html">timetable.js</a>, <a href="timetable.js.html#line66">line 66</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    Распознает дату введенную пользователем и возвращает время, 
+преобразованное в количество минут прошедших между полуночью и введенным
+пользователем временем
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>time</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Введенная пользователем строка</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Количество минут после полуночи или false, 
+    если введенное значение не удовлетворяет шаблону /^(\d+):?(\d*)$/
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+|
+
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="_timeBlur"><span class="type-signature">(private) </span>_timeBlur<span class="signature">(event)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="timetable.js.html">timetable.js</a>, <a href="timetable.js.html#line145">line 145</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    Обработчик события снятия фокуса с элемента ввода. Поля объекта 
+состояния, которые необходимо изменить определяютя с помощью аттрибутов
+data-valueProperty и data-correctProperty.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Event</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Событие React</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="_timeChanged"><span class="type-signature">(private) </span>_timeChanged<span class="signature">(event)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="timetable.js.html">timetable.js</a>, <a href="timetable.js.html#line122">line 122</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    Обработчик события изменения времени пользователем. Поля объекта 
+состояния, которые необходимо изменить определяютя с помощью аттрибутов
+data-valueProperty и data-correctProperty.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Event</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Событие React</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="render"><span class="type-signature"></span>render<span class="signature">()</span><span class="type-signature"> &rarr; {object}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="timetable.js.html">timetable.js</a>, <a href="timetable.js.html#line40">line 40</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    DOM-элементы, определяющие компонент.
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Sun Apr 23 2017 00:29:17 GMT+0300 (MSK) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
