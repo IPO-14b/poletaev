@@ -11,12 +11,36 @@
 	border-bottom: 1px solid #e1e1e1;
 	box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.03);
 
+	@side-offset: 50px;
+	
 	.logo{
 		width: 105px;
 		height: 17px;
 		position: absolute;
-		left: 50px;
+		left: @side-offset;
 		top: (@toolbar-height - 17px) / 2;
 		background-image: data-uri('image/svg+xml;charset=UTF-8', 'logo.svg');
+	}
+
+	.generation{
+		@height: 40px;
+		position: absolute;
+		right: @side-offset;
+		top: 50%;
+		height: @height;
+		line-height: @height;
+		margin-top: -@height / 2;
+	}
+
+	label{
+		margin-left: 10px;
+		&:first-child{
+			margin-left: 0;
+		}
+	}
+
+	.label{
+		color: #999;
+		margin-right: 5px;
 	}
 }
