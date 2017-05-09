@@ -26,7 +26,8 @@
     "matchdep": "^1.0.1"
   },
   "scripts": {
-    "docs": "./node_modules/.bin/jsdoc -d docs -t ./node_modules/docdash/ -p src README.md"
+    "docs": "./node_modules/.bin/jsdoc -d docs -t ./node_modules/docdash/ -p src README.md",
+    "docbook": "dblatex docbook/docs.docbook -b xetex -T db2latex"
   },
   "author": "Vlad Poletaev",
   "license": "MIT",
