@@ -12,6 +12,7 @@
     </info>
     <abstract>
         <para>Данный документ предназначен для использования разработчиками программного обеспечения. Документ содержит общие сведения о программном продукте, технические характеристики: структуру, описание компонентов, примеры использования определнных в проекте публичных интерфейсов.</para>
+        <para>Проект доступен по адресу <ulink url="https://ipo-14b.github.io/poletaev/">ipo-14b.github.io/poletaev</ulink></para>
     </abstract>
 
     <chapter>
@@ -99,6 +100,14 @@
                 <title>dev</title>
                 <para>Выполняет задачи default и watch.</para>
             </section>
+            <section>
+                <title>uglify</title>
+                <para>Выполняет сжатие JavaScript-файлов.</para>
+            </section>
+            <section>
+                <title>production</title>
+                <para>Выполняет сборку проекта и сжатие полученных файлов</para>
+            </section>
         </section>
         <section>
             <title>Зависимости этапа компиляции</title>
@@ -110,6 +119,9 @@
                 <listitem><para><emphasis>babelify</emphasis>: используется для сборки JS файлов</para></listitem>
                 <listitem><para><emphasis>babel-preset-es2015</emphasis>: используется для преобразования стандарта EcmaScript 2015</para></listitem>
                 <listitem><para><emphasis>babel-preset-react</emphasis>: используется для преобразования JSX-файлов</para></listitem>
+                <listitem><para><emphasis>envify</emphasis>: устанавливает переменные среды для сборки в production</para></listitem>
+                <listitem><para><emphasis>uglifyify</emphasis>: сжимает каждый Javascript файл перед объединением</para></listitem>
+                <listitem><para><emphasis>uglify</emphasis>: сжимает Javascript-файлы</para></listitem>
             </itemizedlist>
         </section>
         <section>

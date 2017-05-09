@@ -5,6 +5,8 @@
 менеджере календарей, например 
 [Google Calendar](https://calendar.google.com).
 
+Проект доступен по адресу [ipo-14b.github.io/poletaev](https://ipo-14b.github.io/poletaev/)
+
 ## Компиляция проекта ##
 
 Для компиляции проекта необходим [node.js](https://www.npmjs.com/) и
