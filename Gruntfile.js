@@ -6,6 +6,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-browserify");
     grunt.loadNpmTasks("grunt-contrib-watch");
     grunt.loadNpmTasks("grunt-contrib-copy");
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+
 
     require('matchdep').filterDev('grunt-!(cli)').forEach(grunt.loadNpmTasks);
 
@@ -18,15 +20,29 @@ module.exports = function(grunt) {
             }
         },
         browserify: {
-            options: {
-                browserifyOptions: {
-                    debug: true
+            dev: {
+                options: {
+                    browserifyOptions: {
+                        debug: true
+                    },
+                    transform: [
+                        ["babelify", {presets: ["es2015", "stage-0", "react"]}]
+                    ]
                 },
-                transform: [
-                    ["babelify", {presets: ["es2015", "stage-0", "react"]}]
-                ]
-            }, 
-            main: {
+                dest: "build/main.js",
+                src: "src/main.js"
+            },
+            production: {
+                options: {
+                    browserifyOptions: {
+                        debug: false
+                    },
+                    transform: [
+                        ["babelify", {presets: ["es2015", "stage-0", "react"]}],
+                        "envify",
+                        "uglifyify",
+                    ]
+                },
                 dest: "build/main.js",
                 src: "src/main.js"
             }
@@ -37,6 +53,16 @@ module.exports = function(grunt) {
                 files: {
                     'build/css/elements.css': 'src/less/elements.less',
                     'build/css/app.css': 'src/less/app.less'
+                }
+            },
+            production: {
+                files: {
+                    'build/css/elements.css': 'src/less/elements.less',
+                    'build/css/app.css': 'src/less/app.less'
+                },
+                options: {
+                    compress: true,
+                    optimization: 1024
                 }
             }
         },
@@ -54,9 +80,16 @@ module.exports = function(grunt) {
                 files: ["src/index.html"],
                 tasks: ["copy"]
             }
+        },
+
+        uglify: {
+            production: {
+                files: { 'build/main.js': 'build/main.js' } 
+            }
         }
     });
 
-    grunt.registerTask('default', ['copy', 'less', 'browserify']);
+    grunt.registerTask('default', ['copy', 'less:dev', 'browserify:dev']);
     grunt.registerTask('dev', ['default', 'watch']);
+    grunt.registerTask('production', ['copy', 'less:production', 'browserify:production', 'uglify']);
 };
