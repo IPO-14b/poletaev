@@ -40,7 +40,7 @@ class ToolBar extends React.Component{
                 <label>
                     <span className="label">Конец семестра:</span>
                     <input type="date" value={this.state.endDate} min={this.state.startDate} 
-                        onChange={e => this.setState({startDate: e.target.value})}/>
+                        onChange={e => this.setState({endDate: e.target.value})}/>
                 </label>
 
                 <input type="button" className="button" value="Сгенерировать ical" 
